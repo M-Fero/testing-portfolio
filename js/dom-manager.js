@@ -22,7 +22,15 @@ export class DOMManager {
 
     // Get nav links (lazy loading - queries after DOM is ready)
     getNavLinks() {
-        return document.querySelectorAll('.nav-link');
+        const links = document.querySelectorAll('.nav-link');
+        console.log(`📍 DOM Manager: Query for .nav-link found ${links.length} elements`);
+        if (links.length === 0) {
+            console.warn('⚠️ DOM Manager: No nav links found - sidebar may not be rendered yet');
+            // Try alternative selector
+            const altLinks = document.querySelectorAll('a[data-page]');
+            console.log(`📍 DOM Manager: Alternative query (a[data-page]) found ${altLinks.length} elements`);
+        }
+        return links;
     }
 
     // Render content to main area
@@ -31,7 +39,19 @@ export class DOMManager {
             console.error('❌ Cannot render: content-area element missing');
             return;
         }
+        
+        const htmlLength = html ? html.length : 0;
+        console.log(`🎨 DOM Manager: Rendering content (${htmlLength} characters)`);
+        console.log(`🎨 DOM Manager: contentArea element:`, this.contentArea);
+        
         this.contentArea.innerHTML = html;
+        
+        const newLength = this.contentArea.innerHTML.length;
+        console.log(`✓ DOM Manager: Content rendered successfully (${newLength} characters in DOM)`);
+        
+        if (newLength === 0) {
+            console.error('❌ WARNING: Content area is empty after rendering!');
+        }
     }
 
     // Update active nav link

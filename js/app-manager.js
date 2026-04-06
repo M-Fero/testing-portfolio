@@ -30,10 +30,15 @@ export class ApplicationManager {
             this.sidebarManager.render();
             console.log('✓ App Manager: Sidebar rendered successfully');
 
-            // Now set up navigation listeners (after sidebar is rendered)
-            console.log('📱 App Manager: Setting up navigation listeners...');
+            // NOW ATTACH LISTENERS - must happen after sidebar is in DOM
+            console.log('📱 App Manager: About to set up navigation listeners...');
             this.eventManager.setupNavigation();
-            console.log('✓ App Manager: Navigation listeners attached');
+            const navLinks = document.querySelectorAll('.nav-link');
+            console.log(`✓ App Manager: Navigation setup - found ${navLinks.length} nav links in DOM`);
+            
+            if (navLinks.length === 0) {
+                console.warn('⚠️  WARNING: No nav links found after sidebar render!');
+            }
 
             // Initialize other event listeners  
             console.log('📱 App Manager: Initializing other events...');
@@ -44,6 +49,8 @@ export class ApplicationManager {
             console.log('📱 App Manager: Loading home page...');
             this.navigationController.navigateTo('home');
             console.log('✓ App Manager: Home page loaded');
+            
+            console.log('✅ App Manager: Initialization COMPLETE');
         } catch (error) {
             console.error('❌ App Manager initialization failed:', error);
             throw error;

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Navigation Test</title>
+</head>
+<body>
+    <h1>Portfolio Navigation Test Results</h1>
+    <div id="test-results"></div>
+    <iframe id="portfolio-frame" src="index.html" style="width: 100%; height: 800px; border: 1px solid #ccc; margin-top: 20px;"></iframe>
+    
+    <script>
+        const results = document.getElementById('test-results');
+        let testsPassed = 0;
+        let testsFailed = 0;
+
+        function addResult(testName, passed, details = '') {
+            const status = passed ? '✅ PASS' : '❌ FAIL';
+            const resultDiv = document.createElement('div');
+            resultDiv.style.padding = '10px';
+            resultDiv.style.margin = '5px';
+            resultDiv.style.backgroundColor = passed ? '#d4edda' : '#f8d7da';
+            resultDiv.style.border = `1px solid ${passed ? '#28a745' : '#f5c6cb'}`;
+            resultDiv.style.borderRadius = '4px';
+            resultDiv.innerHTML = `<strong>${status}</strong>: ${testName}${details ? ' - ' + details : ''}`;
+            results.appendChild(resultDiv);
+            
+            if (passed) testsPassed++;
+            else testsFailed++;
+        }
+
+        // Wait for iframe to load
+        setTimeout(() => {
+            try {
+                const iframeDoc = document.getElementById('portfolio-frame').contentDocument;
+                const iframeWindow = document.getElementById('portfolio-frame').contentWindow;
+                
+                // Test 1: Check if app is initialized
+                if (iframeWindow.portfolioApp) {
+                    addResult('App Initialized', true, 'window.portfolioApp exists');
+                } else {
+                    addResult('App Initialized', false, 'window.portfolioApp not found');
+                }
+
+                // Test 2: Check sidebar exists
+                const sidebar = iframeDoc.getElementById('sidebar');
+                addResult('Sidebar Element', !!sidebar, sidebar ? 'Found #sidebar' : 'Missing #sidebar');
+
+                // Test 3: Check nav links
+                const navLinks = iframeDoc.querySelectorAll('.nav-link');
+                addResult('Navigation Links', navLinks.length === 5, `Found ${navLinks.length} nav links (expected 5)`);
+
+                // Test 4: Check content area
+                const contentArea = iframeDoc.getElementById('content-area');
+                addResult('Content Area', !!contentArea && contentArea.innerHTML.length > 0, 
+                    contentArea ? `Content area has ${contentArea.innerHTML.length} characters` : 'Missing #content-area');
+
+                // Test 5: Check profile section
+                const profileName = iframeDoc.querySelector('.profile-section h2');
+                addResult('Profile Name Rendered', !!profileName && profileName.textContent.length > 0,
+                    profileName ? `"${profileName.textContent}"` : 'Profile name not rendered');
+
+                // Test 6: Check social links
+                const socialLinks = iframeDoc.querySelectorAll('.social-links a');
+                addResult('Social Links', socialLinks.length > 0, `Found ${socialLinks.length} social links`);
+
+                // Test 7: Try clicking a nav link
+                if (navLinks.length > 0) {
+                    const initialPage = iframeWindow.portfolioApp?.getCurrentPage?.();
+                    const navLink = navLinks[1]; // Click Projects
+                    const pageBeforeClick = navLink.getAttribute('data-page');
+                    
+                    // Simulate click
+                    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+                    navLink.dispatchEvent(event);
+                    
+                    // Wait a bit for navigation to complete
+                    setTimeout(() => {
+                        const currentPage = iframeWindow.portfolioApp?.getCurrentPage?.();
+                        const urlAfterClick = iframeWindow.location.hash;
+                        
+                        addResult('Navigation Click', currentPage === pageBeforeClick, 
+                            `clicked "${pageBeforeClick}", now on "${currentPage}"`);
+                        addResult('URL After Click', 
+                            !urlAfterClick || urlAfterClick === '', 
+                            `URL is "${urlAfterClick}" (should be empty)`);
+                    }, 500);
+                }
+
+                // Summary
+                setTimeout(() => {
+                    const summary = document.createElement('div');
+                    summary.style.padding = '15px';
+                    summary.style.marginTop = '20px';
+                    summary.style.backgroundColor = '#e7f3ff';
+                    summary.style.border = '2px solid #2196F3';
+                    summary.style.borderRadius = '4px';
+                    summary.innerHTML = `<strong>Test Summary:</strong> ${testsPassed} passed, ${testsFailed} failed`;
+                    results.appendChild(summary);
+                }, 1000);
+
+            } catch (error) {
+                addResult('Test Execution', false, error.message);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

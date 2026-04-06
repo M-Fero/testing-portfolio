@@ -13,6 +13,16 @@ export class SidebarManager {
     // Generate sidebar HTML
     render() {
         const sidebar = this.domManager.getSidebar();
+        
+        if (!sidebar) {
+            console.error('❌ Cannot find sidebar element');
+            return;
+        }
+        
+        // Ensure sidebar is visible on desktop
+        sidebar.classList.remove('hidden');
+        console.log('✓ Sidebar made visible');
+        
         const navLinksContainer = sidebar.querySelector('#nav-links');
         
         if (!navLinksContainer) {
@@ -25,7 +35,7 @@ export class SidebarManager {
         // Update nav links
         navLinksContainer.innerHTML = this.navItems.map(item => `
             <li>
-                <a href="#" data-page="${item.page}" class="nav-link block py-3 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95 flex items-center group">
+                <a href="javascript:void(0);" onclick="return false;" data-page="${item.page}" class="nav-link block py-3 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95 flex items-center group">
                     <i class="${item.icon} w-8 text-center transition-transform group-hover:scale-125"></i>
                     <span class="ml-3">${item.label}</span>
                 </a>

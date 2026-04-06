@@ -21,15 +21,38 @@ export class EventManager {
         const navLinks = this.domManager.getNavLinks();
         console.log(`📌 Event Manager: Found ${navLinks.length} nav links, attaching listeners...`);
         
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const page = e.currentTarget.getAttribute('data-page');
-                console.log(`✓ Event Manager: Nav link clicked → ${page}`);
-                this.navigationController.navigateTo(page);
-            });
+        if (navLinks.length === 0) {
+            console.error('❌ CRITICAL: No nav links found! Navigation will not work.');
+        }
+        
+        navLinks.forEach((link, index) => {
+            // Click handler with strong prevention
+            const clickHandler = (e) => {
+                console.log(`📍 Event Manager: Click on nav link ${index + 1}`);
+                
+                // ABSOLUTELY prevent any default behavior
+                if (e && e.preventDefault) e.preventDefault();
+                if (e && e.stopPropagation) e.stopPropagation();
+                if (e && e.stopImmediatePropagation) e.stopImmediatePropagation();
+                
+                const page = link.getAttribute('data-page');
+                console.log(`✓ Event Manager: Navigating to page="${page}"`);
+                
+                if (page) {
+                    this.navigationController.navigateTo(page);
+                } else {
+                    console.error('❌ No data-page attribute on nav link');
+                }
+                
+                return false;  // Additional safety
+            };
+            
+            link.addEventListener('click', clickHandler, true);  // Use capture phase
+            link.onclick = clickHandler;  // Also set onclick property directly
+            
+            console.log(`  ✓ Listener attached to nav link ${index + 1}`);
         });
-        console.log(`✓ Event Manager: Navigation listeners attached`);
+        console.log(`✅ Event Manager: ${navLinks.length} navigation listeners fully attached`);
     }
 
     // Setup mobile menu toggle
