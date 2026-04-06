@@ -1,112 +1,25 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mostafa Fero | Game Developer</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Custom scrollbar - Dark/Orange theme */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #000000;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #333333;
-            border-radius: 4px;
-        }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background: #f97316;
-            }
-
-        /* Smooth fade-in animation for page transitions */
-        .fade-in {
-            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Timeline specific styles */
-        .timeline-container {
-            border-left: 2px solid #333;
-            padding-left: 2rem;
-            margin-left: 1rem;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 3rem;
-        }
-
-            .timeline-item:last-child {
-                padding-bottom: 0;
-            }
-
-        .timeline-dot {
-            position: absolute;
-            left: -2.45rem;
-            top: 0.25rem;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: #000;
-            border: 3px solid #f97316;
-            box-shadow: 0 0 10px rgba(249, 115, 22, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover .timeline-dot {
-            background-color: #f97316;
-            box-shadow: 0 0 15px rgba(249, 115, 22, 0.8);
-            transform: scale(1.2);
-        }
-
-        /* Company Logo styling - Sleek Transparent Dark Mode */
-        .company-logo {
-            height: 50px; /* Ensures all logos are exactly the same height */
-            width: 100%;
-            max-width: 160px;
-            object-fit: contain; /* Keeps aspect ratio intact */
-            object-position: left;
-            margin-top: 0.5rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            /* Magic trick to make white backgrounds disappear and dark text turn white */
-            filter: grayscale(1) invert(1) brightness(1.5);
-            mix-blend-mode: screen;
-            opacity: 0.6;
-        }
-
-        .timeline-item:hover .company-logo {
-            transform: scale(1.05) translateX(5px);
-            opacity: 1;
-            /* Removes all filters to show true 100% original colors */
-            filter: none;
-            mix-blend-mode: normal;
-        }
-
-        /* Base input autofill fix for dark theme */
-        input:-webkit-autofill, textarea:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 30px #111 inset !important;
-            -webkit-text-fill-color: white !important;
-        }
-    </style>
+    
+    <!-- Custom CSS Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/scrollbar.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/timeline.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -145,438 +58,44 @@
     <!-- Sidebar Navigation -->
     <aside id="sidebar" class="bg-dark-surface border-r border-dark-border w-full md:w-72 md:flex flex-col hidden md:sticky md:top-0 md:h-screen shadow-2xl z-40 md:z-0 transition-all duration-300">
         <div class="p-8 flex-grow overflow-y-auto">
-            <div class="text-center mb-8 hidden md:block group cursor-pointer">
-                <div class="w-32 h-32 mx-auto bg-[#1a1a1a] rounded-full flex items-center justify-center mb-4 border-4 border-[#222] shadow-[0_0_15px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-500 group-hover:border-orange-500 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.3)]">
-                    <img src="https://ui-avatars.com/api/?name=Mostafa+Fero&background=111&color=f97316&size=128" alt="Mostafa Fero" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <h2 class="text-2xl font-bold text-white transition-colors duration-300 group-hover:text-orange-500">Mostafa Fero</h2>
-                <p class="text-orange-500 mt-1 font-medium tracking-wide">Unity Game Developer</p>
+            <!-- Profile Section -->
+            <div class="text-center mb-8 hidden md:block group cursor-pointer profile-section">
+                <div class="profile-avatar"></div>
+                <h2 class="text-2xl font-bold text-white"></h2>
+                <p class="text-orange-500 mt-1 font-medium tracking-wide"></p>
             </div>
 
+            <!-- Navigation Links -->
             <nav>
                 <ul id="nav-links" class="space-y-3">
-                    <li><a href="#" data-page="home" class="nav-link block py-3 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95 flex items-center group"><i class="fas fa-home w-8 text-center transition-transform group-hover:scale-125"></i> Profile</a></li>
-                    <li><a href="#" data-page="projects" class="nav-link block py-3 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95 flex items-center group"><i class="fas fa-gamepad w-8 text-center transition-transform group-hover:scale-125"></i> Projects</a></li>
-                    <li><a href="#" data-page="skills" class="nav-link block py-3 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95 flex items-center group"><i class="fas fa-code w-8 text-center transition-transform group-hover:scale-125"></i> Skills</a></li>
-                    <li><a href="#" data-page="experience" class="nav-link block py-3 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95 flex items-center group"><i class="fas fa-briefcase w-8 text-center transition-transform group-hover:scale-125"></i> Experience</a></li>
-                    <li><a href="#" data-page="contact" class="nav-link block py-3 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95 flex items-center group"><i class="fas fa-envelope w-8 text-center transition-transform group-hover:scale-125"></i> Contact</a></li>
+                    <!-- Generated by JavaScript -->
                 </ul>
             </nav>
 
+            <!-- Download CV Button -->
             <a href="Mostafa-Fero-Unity-Developer.pdf" target="_blank" class="mt-8 hidden md:flex items-center justify-center w-full bg-transparent border border-orange-500 text-orange-500 font-bold py-3 px-4 rounded-lg transition-all hover:bg-orange-500 hover:text-white hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] active:scale-95">
                 <i class="fas fa-download mr-2"></i> Download CV
             </a>
         </div>
 
-        <div class="p-8 bg-black bg-opacity-50 flex justify-center space-x-6 border-t border-dark-border">
-            <a href="https://www.linkedin.com/in/mostafa-fero/" target="_blank" class="text-gray-500 hover:text-orange-500 hover:scale-125 transition-all duration-300 text-xl"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="text-gray-500 hover:text-orange-500 hover:scale-125 transition-all duration-300 text-xl"><i class="fab fa-github"></i></a>
-            <a href="#" class="text-gray-500 hover:text-orange-500 hover:scale-125 transition-all duration-300 text-xl"><i class="fab fa-discord"></i></a>
-            <a href="https://open.spotify.com/user/fero.nitro?si=46ec73f195194b44" target="_blank" class="text-gray-500 hover:text-orange-500 hover:scale-125 transition-all duration-300 text-xl"><i class="fab fa-spotify"></i></a>
+        <!-- Social Links -->
+        <div class="p-8 bg-black bg-opacity-50 flex justify-center space-x-6 border-t border-dark-border social-links">
+            <!-- Generated by JavaScript -->
         </div>
     </aside>
 
     <!-- Main Content Area -->
     <main class="flex-1 p-6 md:p-12 overflow-y-auto relative">
         <!-- Subtle background glow -->
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-orange-600/10 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-orange-600/10 rounded-full blur-[120px] -z-10 pointer-events-none bg-glow"></div>
 
+        <!-- Content Container -->
         <div id="content-area" class="max-w-4xl mx-auto z-10">
-            <!-- Dynamic content injected here -->
+            <!-- Dynamic content injected here by JavaScript -->
         </div>
     </main>
 
-    <!-- JavaScript Data and Logic -->
-    <script>
-        const pages = {
-            home: `
-                <div class="fade-in">
-                    <p class="text-gray-400 text-lg mb-2 tracking-wider uppercase text-sm font-semibold">Unity Game Developer (3+ Years) | C# Programmer</p>
-                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-3">Hi, I'm <span class="text-orange-500 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]">Mostafa Fero</span></h1>
-                    <h2 class="text-xl md:text-2xl text-gray-400 mb-8 font-light">Passionate About Bringing Ideas to Life</h2>
-
-                    <div class="flex flex-wrap gap-4 mb-12">
-                        <a href="#" onclick="document.querySelector('[data-page=projects]').click(); return false;" class="bg-orange-600 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:bg-orange-500 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(249,115,22,0.3)] active:scale-95 flex items-center">
-                            View My Games <i class="fas fa-arrow-right ml-3"></i>
-                        </a>
-                        <a href="Mostafa-Fero-Unity-Developer.pdf" target="_blank" class="bg-transparent border border-gray-600 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:border-orange-500 hover:text-orange-500 active:scale-95 flex items-center md:hidden">
-                            <i class="fas fa-download mr-3"></i> Download CV
-                        </a>
-                    </div>
-
-                    <div class="bg-dark-surface rounded-2xl p-8 md:p-10 mb-12 shadow-2xl border border-dark-border relative overflow-hidden group">
-                        <!-- Decorative accent line -->
-                        <div class="absolute top-0 left-0 w-1 h-full bg-orange-500 transition-all duration-500 group-hover:w-2"></div>
-
-                        <h3 class="text-2xl font-bold text-white mb-6 flex items-center"><i class="fas fa-user-astronaut text-orange-500 mr-3"></i> Professional Summary</h3>
-                        <div class="space-y-4 text-gray-400 leading-relaxed text-lg">
-                            <p>
-                                Dedicated Unity Game Developer with over 3 years of professional experience specializing in 3D simulation games, interactive VR/AR experiences, and advanced gameplay mechanics. Proficient in C# programming, performance optimization, and crafting immersive user interfaces from concept to deployment.
-                            </p>
-                            <p>
-                                Adept at integrating specialized hardware and custom input mechanics, notably developing motion-controlled interactive simulations using Kinect during my tenure at STS (Smart Touch Solutions). Experienced in bridging the gap between gameplay and backend systems through API integration, Firebase, SQL, and multiplayer network architectures.
-                            </p>
-                            <p>
-                                Backed by a strong foundation in full-stack web development and technical support, I bring exceptional troubleshooting skills and an engineering mindset to game development. Proven ability to lead development pipelines, manage version control, and collaborate within cross-functional teams to deliver highly polished, performant titles.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            `,
-            projects: `
-                <div class="fade-in">
-                    <h2 class="text-4xl font-bold text-white mb-10 border-b border-dark-border pb-4"><span class="text-orange-500">Featured</span> Projects</h2>
-
-                    <div class="space-y-12">
-                        <!-- Air Assault -->
-                        <div class="bg-dark-surface rounded-2xl overflow-hidden border border-dark-border transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(249,115,22,0.15)] hover:border-orange-500/50 flex flex-col md:flex-row group">
-                            <div class="md:w-5/12 relative overflow-hidden">
-                                <img src="https://m-fero.github.io/wp-content/uploads/2024/05/Screenshot-2024-05-25-194912-800x450.png" alt="Air Assault" class="w-full h-64 md:h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#111] opacity-0 md:opacity-100"></div>
-                            </div>
-                            <div class="p-8 md:w-7/12 flex flex-col justify-center">
-                                <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-orange-500 transition-colors">Air Assault</h3>
-                                <p class="text-gray-400 text-lg leading-relaxed mb-4">A high-octane 3D space defense game. Airforce invades from outer space, and it's the player's duty to save the planet from alien invaders utilizing smooth movement and rapid-fire mechanics.</p>
-
-                                <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Technical Contributions</h4>
-                                <ul class="text-gray-400 space-y-1 mb-6 list-disc list-inside">
-                                    <li>Implemented core C# gameplay loops and enemy wave AI.</li>
-                                    <li>Optimized particle systems for high-performance laser combat.</li>
-                                    <li>Managed Scene & Object Pooling for projectile efficiency.</li>
-                                </ul>
-
-                                <div class="flex flex-wrap gap-2 mb-6">
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">Unity 3D</span>
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">C#</span>
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">AI Navigation</span>
-                                </div>
-                                <div class="flex gap-4">
-                                    <a href="#" class="bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition-all hover:bg-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] active:scale-95"><i class="fas fa-play mr-2"></i> Play Demo</a>
-                                    <a href="#" class="bg-transparent border border-gray-600 text-gray-300 font-bold py-2 px-6 rounded-lg transition-all hover:border-orange-500 hover:text-orange-500 active:scale-95"><i class="fab fa-github mr-2"></i> Repo</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Space Shooter -->
-                        <div class="bg-dark-surface rounded-2xl overflow-hidden border border-dark-border transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(249,115,22,0.15)] hover:border-orange-500/50 flex flex-col md:flex-row group">
-                            <div class="md:w-5/12 relative overflow-hidden md:order-last">
-                                <img src="https://m-fero.github.io/wp-content/uploads/2024/05/Screenshot-2024-05-25-182042-800x450.png" alt="Space Shooter" class="w-full h-64 md:h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                                <div class="absolute inset-0 bg-gradient-to-l from-transparent to-[#111] opacity-0 md:opacity-100"></div>
-                            </div>
-                            <div class="p-8 md:w-7/12 flex flex-col justify-center">
-                                <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-orange-500 transition-colors">Space Shooter</h3>
-                                <p class="text-gray-400 text-lg leading-relaxed mb-4">Enjoy levels of challenging spaceship combat on unknown planets with special environment setups, advanced post-processing, and dynamic lighting.</p>
-
-                                <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Technical Contributions</h4>
-                                <ul class="text-gray-400 space-y-1 mb-6 list-disc list-inside">
-                                    <li>Integrated Unity Post-Processing stack for cinematic visuals.</li>
-                                    <li>Engineered custom shaders using Unity Shader Graph.</li>
-                                    <li>Designed responsive UI/UX for mobile and PC displays.</li>
-                                </ul>
-
-                                <div class="flex flex-wrap gap-2 mb-6">
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">Post-Processing</span>
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">Shader Graph</span>
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">UI/UX</span>
-                                </div>
-                                <div class="flex gap-4">
-                                    <a href="#" class="bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition-all hover:bg-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] active:scale-95"><i class="fas fa-play mr-2"></i> Play Demo</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- FearRoad Highway -->
-                        <div class="bg-dark-surface rounded-2xl overflow-hidden border border-dark-border transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(249,115,22,0.15)] hover:border-orange-500/50 flex flex-col md:flex-row group">
-                            <div class="md:w-5/12 relative overflow-hidden">
-                                <img src="https://m-fero.github.io/wp-content/uploads/2024/05/FearRoad-1-800x450.png" alt="FearRoad Highway" class="w-full h-64 md:h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#111] opacity-0 md:opacity-100"></div>
-                            </div>
-                            <div class="p-8 md:w-7/12 flex flex-col justify-center">
-                                <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-orange-500 transition-colors">FearRoad Highway</h3>
-                                <p class="text-gray-400 text-lg leading-relaxed mb-4">An endless runner racing game featuring procedural road generation. Players achieve high scores, avoid traffic, and collect coins to unlock new rides.</p>
-
-                                <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Technical Contributions</h4>
-                                <ul class="text-gray-400 space-y-1 mb-6 list-disc list-inside">
-                                    <li>Programmed Procedural Content Generation (PCG) for endless roads.</li>
-                                    <li>Implemented monetization pipelines (In-App Purchases, Ads).</li>
-                                    <li>Optimized for Android/iOS mobile deployment.</li>
-                                </ul>
-
-                                <div class="flex flex-wrap gap-2 mb-6">
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">PCG</span>
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">Mobile Dev</span>
-                                    <span class="bg-[#1a1a1a] text-orange-400 text-xs font-bold px-3 py-1 rounded border border-[#333]">Monetization</span>
-                                </div>
-                                <div class="flex gap-4">
-                                    <a href="#" class="bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition-all hover:bg-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] active:scale-95"><i class="fab fa-google-play mr-2"></i> Play Store</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            skills: `
-                <div class="fade-in">
-                    <h2 class="text-4xl font-bold text-white mb-10 border-b border-dark-border pb-4"><span class="text-orange-500">Technical</span> Skills</h2>
-
-                    <div class="bg-dark-surface p-8 md:p-10 rounded-2xl shadow-2xl border border-dark-border mb-12 relative overflow-hidden">
-                        <div class="absolute -right-10 -top-10 text-9xl text-[#1a1a1a] opacity-50 z-0"><i class="fas fa-laptop-code"></i></div>
-
-                        <div class="relative z-10">
-                            <h3 class="text-2xl font-bold text-white mb-6 flex items-center"><i class="fas fa-bolt text-orange-500 mr-3"></i> Core Strengths & Tech Stack</h3>
-
-                            <!-- Interactive Badges updated with PDF keywords -->
-                            <div class="flex flex-wrap gap-3 mb-10">
-                                ${['Unity 3D / 2D', 'C# Programming', 'VR / AR Development', 'Multiplayer Networking', 'UI / UX Design', 'Game Mechanics & Physics', 'Procedural Content Generation (PCG)', 'Post-Processing & Shader Graph', 'Performance Optimization', 'Firebase & SQL', 'Mobile Dev (Android & iOS)', 'Monetization (Ads, IAP)', 'REST API Integration', 'Git / GitHub', 'Animation & Rigging', 'Level Design'].map(skill =>
-                                    `<span class="bg-[#1a1a1a] text-gray-300 text-sm font-semibold px-5 py-2.5 rounded-full border border-[#333] transition-all duration-300 hover:bg-orange-500 hover:text-white hover:border-orange-400 hover:scale-105 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] cursor-default">${skill}</span>`
-                                ).join('')}
-                            </div>
-
-                            <h3 class="text-2xl font-bold text-white mb-6 flex items-center"><i class="fas fa-star text-orange-500 mr-3"></i> Key Specializations</h3>
-                            <ul class="space-y-6 text-gray-400">
-                                <li class="flex items-start group">
-                                    <i class="fas fa-gamepad text-orange-500 mt-1 mr-4 text-xl transition-transform duration-300 group-hover:translate-x-2"></i>
-                                    <div><strong class="text-white">Unity 3D Game Development:</strong> Simulation, interaction, level design, and storytelling. Successfully upgraded Unity versions and resolved deprecated code issues.</div>
-                                </li>
-                                <li class="flex items-start group">
-                                    <i class="fas fa-code text-orange-500 mt-1 mr-4 text-xl transition-transform duration-300 group-hover:translate-x-2"></i>
-                                    <div><strong class="text-white">C# Programming & Game Mechanics:</strong> Advanced physics, AI for NPCs, Object-Oriented Programming (OOP), design patterns, and optimized mechanics using scene management & object pooling.</div>
-                                </li>
-                                <li class="flex items-start group">
-                                    <i class="fas fa-layer-group text-orange-500 mt-1 mr-4 text-xl transition-transform duration-300 group-hover:translate-x-2"></i>
-                                    <div><strong class="text-white">UI/UX for Games:</strong> Proficient in Canvas, World Space UI, and the Unity UI Toolkit to deliver immersive player experiences.</div>
-                                </li>
-                                <li class="flex items-start group">
-                                    <i class="fas fa-server text-orange-500 mt-1 mr-4 text-xl transition-transform duration-300 group-hover:translate-x-2"></i>
-                                    <div><strong class="text-white">Backend & Data Handling:</strong> Extensive experience with API Integration, Firebase, and SQL to fetch dynamic game data and manage multiplayer functionalities.</div>
-                                </li>
-                                <li class="flex items-start group">
-                                    <i class="fas fa-tachometer-alt text-orange-500 mt-1 mr-4 text-xl transition-transform duration-300 group-hover:translate-x-2"></i>
-                                    <div><strong class="text-white">Performance Optimization:</strong> Expert in utilizing Unity Profiler, code optimization, memory management, and automated testing to ensure framerate stability.</div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h3 class="text-3xl font-bold text-white mb-6 flex items-center"><i class="fas fa-graduation-cap text-orange-500 mr-3"></i> Education</h3>
-                    <div class="bg-dark-surface p-8 rounded-2xl shadow-xl border border-dark-border hover:border-orange-500/30 transition-colors duration-500 group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                            <h4 class="text-2xl font-bold text-white group-hover:text-orange-500 transition-colors">Thebes Academy <span class="text-gray-500 font-normal text-lg block md:inline">| Cairo, Egypt</span></h4>
-                            <span class="bg-orange-900/20 text-orange-500 border border-orange-900/50 text-sm font-bold px-4 py-1.5 rounded-full mt-2 md:mt-0 inline-block w-max">Graduated 05/2014</span>
-                        </div>
-                        <h5 class="text-xl text-gray-300 font-medium mb-6">Computer Science</h5>
-                        <ul class="space-y-3 text-gray-400">
-                            <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">▹</span> Gained in-depth knowledge of data structures and algorithms to optimize problem-solving.</li>
-                            <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">▹</span> Learned principles of software engineering, including design patterns and version control.</li>
-                            <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">▹</span> Acquired understanding of database management and SQL.</li>
-                            <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">▹</span> Understood software development lifecycle and applied Agile principles.</li>
-                        </ul>
-                    </div>
-                </div>
-            `,
-            experience: `
-                <div class="fade-in">
-                    <h2 class="text-4xl font-bold text-white mb-12 border-b border-dark-border pb-4"><span class="text-orange-500">Professional</span> Experience</h2>
-
-                    <div class="timeline-container mt-8">
-
-                        <!-- STS -->
-                        <div class="timeline-item group">
-                            <div class="timeline-dot"></div>
-                            <span class="text-sm font-bold text-white bg-orange-600 shadow-[0_0_10px_rgba(234,88,12,0.4)] px-4 py-1.5 rounded-full mb-4 inline-block transform transition duration-300 group-hover:scale-105">04/2025 – Present</span>
-                            <h3 class="text-2xl font-bold text-white mt-2 group-hover:text-orange-500 transition-colors">Unity Game Developer (Full-Time)</h3>
-                            <h4 class="text-xl text-gray-500 font-medium mt-1 mb-4">STS - Smart Touch Solutions</h4>
-                            <ul class="space-y-3 text-gray-400">
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">VR & Interactive Simulations:</strong> Developing VR and interactive simulation experiences using Unity (URP/Standard).</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Mechanics & Inputs:</strong> Implementing gameplay systems, input interactions, and specialized hardware controller-based mechanics like Kinect integration.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Optimization:</strong> Optimizing scenes, build size, and framerate across devices.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Workflow:</strong> Integrating assets, animation workflows, and collaborating with designers to build prototypes.</p></li>
-                            </ul>
-                        </div>
-
-                        <!-- ARCON (Part-Time) -->
-                        <div class="timeline-item group">
-                            <div class="timeline-dot"></div>
-                            <span class="text-sm font-bold text-orange-400 bg-orange-900/20 border border-orange-900/50 px-4 py-1.5 rounded-full mb-4 inline-block transform transition duration-300 group-hover:scale-105">04/2025 – 02/2026</span>
-                            <h3 class="text-2xl font-bold text-white mt-2 group-hover:text-orange-500 transition-colors">Unity Game Developer (Part-Time)</h3>
-                            <h4 class="text-xl text-gray-500 font-medium mt-1 mb-4">ARCON</h4>
-                            <ul class="space-y-3 text-gray-400">
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Maintenance & Support:</strong> Maintained and supported ongoing simulation & training game projects.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Continuous Integration:</strong> Implemented updates, bug fixes, and feature improvements.</p></li>
-                            </ul>
-                        </div>
-
-                        <!-- ARCON (Full-Time) -->
-                        <div class="timeline-item group">
-                            <div class="timeline-dot"></div>
-                            <img src="https://m-fero.github.io/wp-content/uploads/2024/06/a40d3a3f-9db2-4eb9-b00e-fb1686f8f1fb-e1717438225308-1.png" alt="ARCON" class="company-logo">
-                            <span class="text-sm font-bold text-orange-400 bg-orange-900/20 border border-orange-900/50 px-4 py-1.5 rounded-full mb-4 inline-block transform transition duration-300 group-hover:scale-105">03/2023 – 04/2025</span>
-                            <h3 class="text-2xl font-bold text-white mt-2 group-hover:text-orange-500 transition-colors">Unity Game Developer (Full-Time)</h3>
-                            <h4 class="text-xl text-gray-500 font-medium mt-1 mb-4">ARCON</h4>
-                            <ul class="space-y-3 text-gray-400">
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Educational Simulation Games:</strong> Worked on 3D simulation-based educational games, ensuring immersive learning experiences.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Gameplay Mechanics:</strong> Designed, developed, and maintained game mechanics to enhance interactivity and performance.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Backend Integration:</strong> Implemented data fetching mechanisms to integrate dynamic content from backend systems.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Unity Engine Upgrade:</strong> Successfully upgraded Unity from 2021 to a newer version (6000), resolving deprecated code.</p></li>
-                            </ul>
-                        </div>
-
-                        <!-- Etisalat by E& -->
-                        <div class="timeline-item group">
-                            <div class="timeline-dot"></div>
-                            <span class="text-sm font-bold text-orange-400 bg-orange-900/20 border border-orange-900/50 px-4 py-1.5 rounded-full mb-4 inline-block transform transition duration-300 group-hover:scale-105">09/2022 – 03/2023</span>
-                            <h3 class="text-2xl font-bold text-white mt-2 group-hover:text-orange-500 transition-colors">Senior Technical Support Specialist</h3>
-                            <h4 class="text-xl text-gray-500 font-medium mt-1 mb-4">Etisalat by E&</h4>
-                            <ul class="space-y-3 text-gray-400">
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">System Inspection:</strong> Analyzed and inspected C#-based systems, identifying and addressing performance bottlenecks.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Debugging:</strong> Diagnosed and resolved software issues applying C# debugging techniques to enhance stability.</p></li>
-                            </ul>
-                        </div>
-
-                        <!-- Vodafone -->
-                        <div class="timeline-item group">
-                            <div class="timeline-dot"></div>
-                            <img src="https://m-fero.github.io/wp-content/uploads/2024/06/164bd910-2c64-40c1-86ef-80c71b3eb9ca-1.png" alt="Vodafone" class="company-logo">
-                            <span class="text-sm font-bold text-orange-400 bg-orange-900/20 border border-orange-900/50 px-4 py-1.5 rounded-full mb-4 inline-block transform transition duration-300 group-hover:scale-105">11/2017 – 10/2022</span>
-                            <h3 class="text-2xl font-bold text-white mt-2 group-hover:text-orange-500 transition-colors">Data and Fixed Representative</h3>
-                            <h4 class="text-xl text-gray-500 font-medium mt-1 mb-4">Vodafone</h4>
-                            <ul class="space-y-3 text-gray-400">
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Siebel CRM Simulation:</strong> Developed a web-based Siebel CRM simulation using HTML, CSS, JavaScript, and PHP.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Android Booking App:</strong> Designed and built an Android-based vacation booking system with Firebase integration.</p></li>
-                            </ul>
-                        </div>
-
-                        <!-- DIVA LABS -->
-                        <div class="timeline-item group">
-                            <div class="timeline-dot"></div>
-                            <img src="https://m-fero.github.io/wp-content/uploads/2024/06/7e1cb620-5770-491c-b894-022ca0a19f22-1.png" alt="DIVA LABS" class="company-logo">
-                            <span class="text-sm font-bold text-orange-400 bg-orange-900/20 border border-orange-900/50 px-4 py-1.5 rounded-full mb-4 inline-block transform transition duration-300 group-hover:scale-105">01/2017 – 08/2017</span>
-                            <h3 class="text-2xl font-bold text-white mt-2 group-hover:text-orange-500 transition-colors">Web Developer</h3>
-                            <h4 class="text-xl text-gray-500 font-medium mt-1 mb-4">Diva-Lab</h4>
-                            <ul class="space-y-3 text-gray-400">
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Full-Stack Development:</strong> Implemented both front-end and back-end functionalities utilizing OOP, PHP, and SQL.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">CRUD Operations:</strong> Built interactive user interfaces with AJAX-based CRUD functionality.</p></li>
-                            </ul>
-                        </div>
-
-                        <!-- NouranMedia -->
-                        <div class="timeline-item group">
-                            <div class="timeline-dot"></div>
-                            <span class="text-sm font-bold text-orange-400 bg-orange-900/20 border border-orange-900/50 px-4 py-1.5 rounded-full mb-4 inline-block transform transition duration-300 group-hover:scale-105">09/2014 – 10/2016</span>
-                            <h3 class="text-2xl font-bold text-white mt-2 group-hover:text-orange-500 transition-colors">System Administrator</h3>
-                            <h4 class="text-xl text-gray-500 font-medium mt-1 mb-4">NouranMedia</h4>
-                            <ul class="space-y-3 text-gray-400">
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Version Control & Asset Management:</strong> Managed user accounts, permissions, and repositories for smooth collaboration in development teams.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Server & Database Administration:</strong> Maintained and configured servers, cloud storage, and databases to support online applications and backend services.</p></li>
-                                <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1 transition-transform group-hover:translate-x-1">▹</span><p><strong class="text-gray-200">Technical Support & Issue Resolution:</strong> Provided IT support, diagnosing and resolving technical problems to ensure a stable environment for developers.</p></li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            `,
-            contact: `
-                <div class="fade-in">
-                    <h2 class="text-4xl font-bold text-white mb-2">Let's Get in <span class="text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.4)]">Touch</span></h2>
-                    <p class="text-gray-400 mb-10 text-lg">Feel free to reach out for collaborations, project inquiries, or just to say hi!</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        <!-- Email -->
-                        <div class="bg-dark-surface p-8 rounded-2xl border border-dark-border text-center shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-orange-500 hover:shadow-[0_15px_30px_rgba(249,115,22,0.15)] group cursor-pointer">
-                            <div class="w-16 h-16 bg-[#1a1a1a] text-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl border border-[#333] transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-400">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <h3 class="text-white font-bold mb-2 text-lg">Email Address</h3>
-                            <a href="mailto:Mostafa.F.Fero@gmail.com" class="text-gray-400 group-hover:text-orange-400 transition-colors text-sm break-all">Mostafa.F.Fero@gmail.com</a>
-                        </div>
-
-                        <!-- Phone -->
-                        <div class="bg-dark-surface p-8 rounded-2xl border border-dark-border text-center shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-orange-500 hover:shadow-[0_15px_30px_rgba(249,115,22,0.15)] group cursor-pointer">
-                            <div class="w-16 h-16 bg-[#1a1a1a] text-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl border border-[#333] transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-400">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <h3 class="text-white font-bold mb-2 text-lg">Call Me</h3>
-                            <a href="tel:+201118005622" class="text-gray-400 group-hover:text-orange-400 transition-colors">+20 111 800 5622</a>
-                        </div>
-
-                        <!-- Address -->
-                        <div class="bg-dark-surface p-8 rounded-2xl border border-dark-border text-center shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-orange-500 hover:shadow-[0_15px_30px_rgba(249,115,22,0.15)] group cursor-pointer">
-                            <div class="w-16 h-16 bg-[#1a1a1a] text-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl border border-[#333] transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-400">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <h3 class="text-white font-bold mb-2 text-lg">Address</h3>
-                            <p class="text-gray-400 group-hover:text-orange-400 transition-colors">6 of October City, Egypt</p>
-                        </div>
-                    </div>
-
-                    <!-- Contact Form -->
-                    <div class="bg-dark-surface p-8 md:p-10 rounded-2xl border border-dark-border shadow-2xl relative overflow-hidden group">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-600 via-orange-400 to-orange-600 opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                        <h3 class="text-2xl font-bold text-white mb-8 flex items-center"><i class="fas fa-paper-plane text-orange-500 mr-3"></i> Send Message</h3>
-                        <form class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <input type="text" placeholder="Your Name" class="w-full bg-[#111] text-white border border-[#333] rounded-xl p-4 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all shadow-inner">
-                                <input type="email" placeholder="Your Email" class="w-full bg-[#111] text-white border border-[#333] rounded-xl p-4 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all shadow-inner">
-                            </div>
-                            <textarea placeholder="Your Message..." rows="6" class="w-full bg-[#111] text-white border border-[#333] rounded-xl p-4 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all shadow-inner resize-none"></textarea>
-                            <button type="button" class="bg-orange-600 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 hover:bg-orange-500 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(249,115,22,0.3)] active:scale-95 active:translate-y-0 w-full md:w-auto flex items-center justify-center">
-                                Send Message <i class="fas fa-arrow-right ml-3 text-sm"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            `
-        };
-
-        // DOM Elements
-        const contentArea = document.getElementById('content-area');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sidebar = document.getElementById('sidebar');
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-
-        // Navigation Logic
-        function loadPage(pageName) {
-            // Update content
-            contentArea.innerHTML = pages[pageName] || '<h2 class="text-2xl text-white">Page not found</h2>';
-
-            // Scroll to top on page change
-            window.scrollTo({top: 0, behavior: 'smooth'});
-
-            // Update active state on nav links
-            navLinks.forEach(link => {
-                // Reset classes
-                link.classList.remove('bg-orange-600', 'text-white', 'shadow-[0_0_15px_rgba(249,115,22,0.4)]', 'text-orange-500', 'bg-[#1a1a1a]');
-                link.classList.add('text-gray-400', 'hover:bg-[#1a1a1a]', 'hover:text-orange-500');
-
-                // Set active class
-                if(link.getAttribute('data-page') === pageName) {
-                    link.classList.remove('text-gray-400', 'hover:bg-[#1a1a1a]', 'hover:text-orange-500');
-                    link.classList.add('bg-orange-600', 'text-white', 'shadow-[0_0_15px_rgba(249,115,22,0.4)]');
-                }
-            });
-
-            // On mobile, close sidebar after clicking
-            if (window.innerWidth < 768 && !sidebar.classList.contains('hidden')) {
-                sidebar.classList.add('hidden');
-            }
-        }
-
-        // Event Listeners
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const page = e.currentTarget.getAttribute('data-page');
-                loadPage(page);
-            });
-        });
-
-        // Mobile Menu Toggle
-        mobileMenuBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-        });
-
-        // Load default page
-        loadPage('home');
-    </script>
+    <!-- Application Scripts - Module Imports -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
