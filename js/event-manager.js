@@ -6,33 +6,40 @@ export class EventManager {
         this.navigationController = navigationController;
         this.domManager = domManager;
         this.templateRenderer = templateRenderer;
-        this.navLinks = domManager.getNavLinks();
         this.mobileMenuBtn = domManager.getMobileMenuBtn();
-        this.sidebar = domManager.getSidebar();
     }
 
     // Initialize all event listeners
     initializeEvents() {
-        this.setupNavigation();
         this.setupMobileMenu();
         this.setupNavObserver();
         this.setupResponsiveListener();
     }
 
-    // Setup navigation click listeners
+    // Setup navigation click listeners (dynamic - called after sidebar renders)
     setupNavigation() {
-        this.navLinks.forEach(link => {
+        const navLinks = this.domManager.getNavLinks();
+        console.log(`📌 Event Manager: Found ${navLinks.length} nav links, attaching listeners...`);
+        
+        navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const page = e.currentTarget.getAttribute('data-page');
+                console.log(`✓ Event Manager: Nav link clicked → ${page}`);
                 this.navigationController.navigateTo(page);
             });
         });
+        console.log(`✓ Event Manager: Navigation listeners attached`);
     }
 
     // Setup mobile menu toggle
     setupMobileMenu() {
+        if (!this.mobileMenuBtn) {
+            console.warn('⚠️ Event Manager: Mobile menu button not found');
+            return;
+        }
         this.mobileMenuBtn.addEventListener('click', () => {
+            console.log('✓ Event Manager: Mobile menu clicked');
             this.domManager.toggleSidebar();
         });
     }
@@ -40,6 +47,8 @@ export class EventManager {
     // Setup observer for navigation changes
     setupNavObserver() {
         this.navigationController.subscribe((pageName) => {
+            console.log(`📡 Event Manager: Page change observed → '${pageName}'`);
+            
             // Render new content
             const content = this.templateRenderer.render(pageName);
             this.domManager.renderContent(content);
@@ -52,7 +61,10 @@ export class EventManager {
 
             // Re-attach event listeners for dynamic content
             this.attachDynamicEventListeners();
+            
+            console.log(`✓ Event Manager: Page rendering complete for '${pageName}'`);
         });
+        console.log('✓ Event Manager: Navigation observer set up');
     }
 
     // Setup responsive window listener
@@ -60,7 +72,7 @@ export class EventManager {
         window.addEventListener('resize', () => {
             // Handle responsive behavior if needed
             if (window.innerWidth >= 768) {
-                this.sidebar.classList.remove('hidden');
+                this.domManager.getSidebar().classList.remove('hidden');
             }
         });
     }

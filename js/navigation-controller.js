@@ -19,9 +19,11 @@ export class NavigationController {
 
     // Navigate to a page
     navigateTo(pageName) {
+        console.log(`🔗 Navigation: Switching to page '${pageName}'`);
         this.currentPage = pageName;
         this.notifyObservers(pageName);
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        console.log(`✓ Navigation: Currently on page '${this.currentPage}'`);
     }
 
     // Get current page

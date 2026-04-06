@@ -20,9 +20,13 @@ export class TemplateRenderer {
 
     // Render page by name
     render(pageName) {
+        console.log(`🎨 Template Renderer: Rendering page '${pageName}'`);
         if (this.templates[pageName]) {
-            return this.templates[pageName]();
+            const html = this.templates[pageName]();
+            console.log(`✓ Template Renderer: Page '${pageName}' rendered (${html.length} chars)`);
+            return html;
         }
+        console.error(`❌ Template Renderer: Page '${pageName}' not found`);
         return '<h2 class="text-2xl text-white">Page not found</h2>';
     }
 

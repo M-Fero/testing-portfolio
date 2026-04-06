@@ -15,6 +15,13 @@ export class SidebarManager {
         const sidebar = this.domManager.getSidebar();
         const navLinksContainer = sidebar.querySelector('#nav-links');
         
+        if (!navLinksContainer) {
+            console.error('❌ Cannot find #nav-links in sidebar');
+            return;
+        }
+        
+        console.log('✓ Rendering sidebar with', this.navItems.length, 'nav items');
+        
         // Update nav links
         navLinksContainer.innerHTML = this.navItems.map(item => `
             <li>
@@ -24,6 +31,7 @@ export class SidebarManager {
                 </a>
             </li>
         `).join('');
+        console.log('✓ Nav links rendered');
 
         // Update profile section
         const profileSection = sidebar.querySelector('.profile-section');
@@ -35,6 +43,9 @@ export class SidebarManager {
                 <h2 class="text-2xl font-bold text-white group-hover:text-orange-500 transition-colors">${this.profileData.name}</h2>
                 <p class="text-orange-500 mt-1 font-medium tracking-wide">${this.profileData.title}</p>
             `;
+            console.log('✓ Profile section rendered');
+        } else {
+            console.warn('⚠️ Profile section not found in sidebar');
         }
 
         // Update social links
@@ -45,6 +56,9 @@ export class SidebarManager {
                     <i class="${link.icon}"></i>
                 </a>
             `).join('');
+            console.log('✓ Social links rendered');
+        } else {
+            console.warn('⚠️ Social links section not found in sidebar');
         }
     }
 }

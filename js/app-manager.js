@@ -22,14 +22,32 @@ export class ApplicationManager {
 
     // Initialize application
     initialize() {
-        // Render sidebar
-        this.sidebarManager.render();
+        try {
+            console.log('📱 App Manager: Starting initialization...');
+            
+            // Render sidebar first (this creates nav links and social links)
+            console.log('📱 App Manager: Rendering sidebar...');
+            this.sidebarManager.render();
+            console.log('✓ App Manager: Sidebar rendered successfully');
 
-        // Initialize event listeners
-        this.eventManager.initializeEvents();
+            // Now set up navigation listeners (after sidebar is rendered)
+            console.log('📱 App Manager: Setting up navigation listeners...');
+            this.eventManager.setupNavigation();
+            console.log('✓ App Manager: Navigation listeners attached');
 
-        // Load default page
-        this.navigationController.navigateTo('home');
+            // Initialize other event listeners  
+            console.log('📱 App Manager: Initializing other events...');
+            this.eventManager.initializeEvents();
+            console.log('✓ App Manager: Event listeners initialized');
+
+            // Load default page
+            console.log('📱 App Manager: Loading home page...');
+            this.navigationController.navigateTo('home');
+            console.log('✓ App Manager: Home page loaded');
+        } catch (error) {
+            console.error('❌ App Manager initialization failed:', error);
+            throw error;
+        }
     }
 
     // Navigate to page (public API)
