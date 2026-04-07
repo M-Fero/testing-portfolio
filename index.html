@@ -168,27 +168,18 @@
                     message: form.querySelector('[name="message"]').value
                 })
             })
-            .then(res => {
-                if (!res.ok) throw new Error('Server error: ' + res.status);
-                return res.json();
+            .then(res => res.json())
+            .then(() => {
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i> Message Sent!';
+                btn.classList.replace('bg-gray-600', 'bg-green-600');
+                form.reset();
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalHTML;
+                    btn.classList.replace('bg-green-600', 'bg-orange-600');
+                }, 4000);
             })
-            .then(data => {
-                console.log('FormSubmit response:', data);
-                if (data.success === 'true' || data.success === true) {
-                    btn.innerHTML = '<i class="fas fa-check mr-2"></i> Message Sent!';
-                    btn.classList.replace('bg-gray-600', 'bg-green-600');
-                    form.reset();
-                    setTimeout(() => {
-                        btn.disabled = false;
-                        btn.innerHTML = originalHTML;
-                        btn.classList.replace('bg-green-600', 'bg-orange-600');
-                    }, 4000);
-                } else {
-                    throw new Error('FormSubmit rejected: ' + JSON.stringify(data));
-                }
-            })
-            .catch(err => {
-                console.error('FormSubmit error:', err);
+            .catch(() => {
                 btn.innerHTML = '<i class="fas fa-times mr-2"></i> Failed. Try Again.';
                 btn.classList.replace('bg-gray-600', 'bg-red-600');
                 setTimeout(() => {
