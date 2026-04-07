@@ -15,15 +15,15 @@
 }
 
 .nav-link:hover {
-    transform: scale(1.05);
     background-color: #1a1a1a;
     color: var(--color-primary);
+    box-shadow: inset 4px 0 0 var(--color-primary);
 }
 
 .nav-link.active {
     background-color: var(--color-primary-dark);
     color: var(--color-text-primary);
-    box-shadow: var(--shadow-sm);
+    box-shadow: inset 4px 0 0 var(--color-primary);
 }
 
 /* Button Styles */
